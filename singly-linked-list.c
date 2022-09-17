@@ -3,7 +3,7 @@
 
 typedef struct node
 {
-    int data;
+    int data; 
     struct node *next;
 } node;
 
@@ -48,6 +48,7 @@ void main()
 void insert()
 {
     int op = 1, i;
+    
     newn = (node *) malloc(sizeof(node));
 
     printf("Enter the element: ");
@@ -66,18 +67,17 @@ void insert()
         return;
     }
     
-    // Append
     else if (op == n + 1)
     {
         if (head == NULL)
         {
-            head = newn; // **
+            head = newn; 
             head->next = NULL;
         }
         else
         {
             temp = head;
-            while (temp->next != NULL) // **
+            while (temp->next != NULL)
             {
                 temp = temp->next;
             }
@@ -86,7 +86,6 @@ void insert()
         }
     }
     
-    // Insert
     else
     {
         if (op == 1)
@@ -97,7 +96,7 @@ void insert()
         else
         {
             temp = head;
-            for (i = 0; i < op - 2; i++)
+            for (i = 1; i < op - 1; i++)
             {
                 temp = temp->next;
             }
@@ -121,6 +120,7 @@ void delete()
     {
         printf("Enter it's position: ");
         scanf("%d", &op);
+        
         if ((op < 1) || (op > n))
         {
             printf("Invalid position!\n");
@@ -143,10 +143,11 @@ void delete()
         else if (op == n)
         {
             temp = head;
-            for (i = 0; i < n - 2; i++)
+            for (i = 1; i < n - 1; i++)
             {
                 temp = temp->next;
             }
+            free(temp->next);
             temp->next = NULL;
         }
         else
@@ -158,6 +159,7 @@ void delete()
                 temp = temp->next;
             }
             t->next = temp->next;
+            free(temp);
         }
         
         printf("Successfully deleted!\n");
