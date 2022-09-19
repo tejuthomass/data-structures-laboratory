@@ -216,18 +216,3 @@ void display()
         printf("\n");
     }
 }
-
-void length()
-{
-    printf("Length: %d\n", n);
-}
-
-void freeList()
-{
-    while (head)
-    {
-        temp = head;
-        head = head->next;
-        free(temp);
-    }
-}

@@ -1,20 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *list, n = 0;
+int *list, n = 0; // Global declaration; n - number of elements 
 
-void create();
+void create(); // Function Prototype
 void insert();
 void delete();
 void display();
 
 void main()
 {
-    int c;
+    int c; // c - choice
     
     printf("$$$ LIST ADT USING ARRAY $$$\n");
    
-    while(1)
+    while (1)
     {
         printf("\nSelect any operation:\n1 - Create\t2 - Insert/Append\t3 - Delete\t4 - Display\t5 - Exit\n\nYour choice: ");
         scanf("%d", &c);
@@ -39,7 +39,7 @@ void main()
                 break;
             case 4:
                 display();
-                break;
+                break; 
             case 5:
                 free(list);
                 printf("Successfully exited!\n");
@@ -54,8 +54,8 @@ void main()
 
 void create()
 {
-    int e, i;
-    char w;
+    int e, i; // e - number of elements; i - for iteration
+    char w; // w - warning
     
     if (n > 0)
     {
@@ -76,7 +76,7 @@ void create()
     }
     
     printf("Enter number of elements: ");
-    scanf("%d", &e);
+    scanf("%d", &e); // & - reference
     
     list = (int *) malloc(e * sizeof(int));
     
@@ -84,9 +84,9 @@ void create()
     for (i = 0; i < e; i++)
     {
         printf("Element %d: ", i + 1);
-        scanf("%d", (list + i));
+        scanf("%d", (list + i)); // 100 104 108 
     }
-    n = e;
+    n = e; //
 }
 
 void insert()
@@ -106,13 +106,12 @@ void insert()
         printf("Invalid position!\n");
         return;
     }
-    else if(p == n + 1)
+    else if(p == n + 1) // append
     {
         list = realloc(list, (n + 1) * sizeof(int));
         list[p - 1] = x;
-        n++;
     }
-    else
+    else // insert
     {
         list = realloc(list, (n + 1) * sizeof(int));
         for (i = n - 1; i >= p - 1; i--)
@@ -120,8 +119,8 @@ void insert()
             list[i + 1] = list[i];
         }
         list[p - 1] = x;
-        n++;
     }
+    n++;
     printf("Successfully added!\n");
 }
 
@@ -143,6 +142,7 @@ void delete()
             list[i] = list[i + 1];
         }
         n--;
+        // realloc
         printf("Successfully deleted!\n");
     }
 }
