@@ -3,7 +3,7 @@
 
 typedef struct node
 {
-    int data;
+    int data; 
     struct node *next;
 } node;
 
@@ -12,7 +12,10 @@ int n = 0;
 
 void insert();
 void delete();
+void freeList();
+void reverse();
 void display();
+void length();
 
 void main()
 {
@@ -21,7 +24,7 @@ void main()
     
     while (1)
     {
-        printf("\nSelect any operation:\n1 - Insert/Append\t2 - Delete\t3 - Display\t4 - Exit\n\nYour choice: ");
+        printf("\nSelect any operation:\n1 - Insert/Append a node\n2 - Delete a node\n3 - Delete the list\n4 - Reverse\n5 - Display\n6 - Know it's length\n7 - Exit\n\nYour choice: ");
         scanf("%d", &ch);
         
         switch (ch)
@@ -33,10 +36,20 @@ void main()
                 delete();
                 break;
             case 3:
-                display();
+                freeList();
+                printf("Successfully deleted the list!\n");
                 break;
             case 4:
-                free(head);
+                reverse();
+                break;
+            case 5:
+                display();
+                break;
+            case 6:
+                length();
+                break;
+            case 7:
+                freeList();
                 printf("Successfully exited!\n");
                 exit(0);
             default:
@@ -48,6 +61,7 @@ void main()
 void insert()
 {
     int op = 1, i;
+    
     newn = (node *) malloc(sizeof(node));
 
     printf("Enter the element: ");
@@ -66,18 +80,17 @@ void insert()
         return;
     }
     
-    // Append
     else if (op == n + 1)
     {
         if (head == NULL)
         {
-            head = newn; // **
+            head = newn; 
             head->next = NULL;
         }
         else
         {
             temp = head;
-            while (temp->next != NULL) // **
+            while (temp->next != NULL)
             {
                 temp = temp->next;
             }
@@ -86,7 +99,6 @@ void insert()
         }
     }
     
-    // Insert
     else
     {
         if (op == 1)
@@ -97,7 +109,7 @@ void insert()
         else
         {
             temp = head;
-            for (i = 0; i < op - 2; i++)
+            for (i = 1; i < op - 1; i++)
             {
                 temp = temp->next;
             }
@@ -121,6 +133,7 @@ void delete()
     {
         printf("Enter it's position: ");
         scanf("%d", &op);
+        
         if ((op < 1) || (op > n))
         {
             printf("Invalid position!\n");
@@ -143,10 +156,11 @@ void delete()
         else if (op == n)
         {
             temp = head;
-            for (i = 0; i < n - 2; i++)
+            for (i = 1; i < n - 1; i++)
             {
                 temp = temp->next;
             }
+            free(temp->next);
             temp->next = NULL;
         }
         else
@@ -158,11 +172,28 @@ void delete()
                 temp = temp->next;
             }
             t->next = temp->next;
+            free(temp);
         }
         
         printf("Successfully deleted!\n");
         n--;
     }
+}
+
+void reverse()
+{
+    t = NULL;
+    temp = head;
+    
+    while (temp)
+    {
+        newn = temp->next;
+        temp->next = t;
+        t = temp;
+        temp = newn;
+    }
+    head = t;
+    printf("Your list has been successfully reversed!\n");
 }
 
 void display()
@@ -183,5 +214,20 @@ void display()
             temp = temp->next;
         }
         printf("\n");
+    }
+}
+
+void length()
+{
+    printf("Length: %d\n", n);
+}
+
+void freeList()
+{
+    while (head)
+    {
+        temp = head;
+        head = head->next;
+        free(temp);
     }
 }
