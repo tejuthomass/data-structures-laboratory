@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *list, n = 0; // Global declaration; n - number of elements 
+int *list, n = 0;
 
-void create(); // Function Prototype
+void create();
 void insert();
 void delete();
 void display();
 
 void main()
 {
-    int c; // c - choice
+    int c;
     
     printf("$$$ LIST ADT USING ARRAY $$$\n");
    
@@ -54,8 +54,8 @@ void main()
 
 void create()
 {
-    int e, i; // e - number of elements; i - for iteration
-    char w; // w - warning
+    int e, i;
+    char w; 
     
     if (n > 0)
     {
@@ -84,7 +84,7 @@ void create()
     for (i = 0; i < e; i++)
     {
         printf("Element %d: ", i + 1);
-        scanf("%d", (list + i)); // 100 104 108 
+        scanf("%d", (list + i));
     }
     n = e; //
 }
@@ -142,7 +142,7 @@ void delete()
             list[i] = list[i + 1];
         }
         n--;
-        // realloc
+        list = realloc(list, (n + 1) * sizeof(int));
         printf("Successfully deleted!\n");
     }
 }
