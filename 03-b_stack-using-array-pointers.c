@@ -32,6 +32,7 @@ void main()
             display();
             break;
         case 4:
+            printf("Successfully exited!\n");
             exit(0);
         default:
             printf("Invalid Choice!!");
