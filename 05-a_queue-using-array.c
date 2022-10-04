@@ -7,7 +7,7 @@ void enqueue();
 void dequeue();
 void display();
 
-int q[SIZE], item, front = -1;
+int q[SIZE], front = -1;
 
 void main()
 {
